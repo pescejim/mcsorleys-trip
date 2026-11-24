@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>McSorley's Trip — Fri Nov 27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f1e3;
+    --bg-2:#efe6d0;
+    --card:#fffdf7;
+    --card-2:#f3ead3;
+    --ink:#1a231e;
+    --muted:#5a665e;
+    --line:#ddd2b8;
+    --emerald:#0d3b2e;
+    --emerald-2:#14503e;
+    --gold:#b9975a;
+    --gold-light:#f3d98b;
+    --amber-bg:#fff3c4;
+    --amber-ink:#6b4e00;
+    --amber-border:#e6c84a;
+    --red:#8b1e1e;
+    --shadow:0 10px 30px rgba(13,59,46,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0f1713;
+      --bg-2:#0a120e;
+      --card:#1a2520;
+      --card-2:#22302a;
+      --ink:#eef2ec;
+      --muted:#a8b5ab;
+      --line:#2e3d35;
+      --emerald:#e8c87a;
+      --emerald-2:#1e3a2f;
+      --gold:#c9a86a;
+      --amber-bg:#3a2f0a;
+      --amber-ink:#ffe58a;
+      --amber-border:#8a7420;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Public Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  button,[role="button"],select,summary{ min-height:2.25rem; }
+  .wrap{ max-width:720px; margin:0 auto; padding:0 18px 28px; }
+
+  /* Hero */
+  .hero{
+    margin:0 -18px;
+    background:var(--emerald);
+    color:#fff;
+    padding:28px 20px 26px;
+    position:relative;
+    overflow:hidden;
+  }
+  @media (prefers-color-scheme: dark){
+    .hero{ background:#123528; }
+  }
+  .hero::after{
+    content:""; position:absolute; right:-40px; top:-40px; width:180px; height:180px;
+    border:28px solid rgba(255,255,255,.06); border-radius:50%;
+  }
+  .hero-top{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; position:relative; z-index:1; }
+  .date-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    background:#fff; color:#0d3b2e; font-weight:800; letter-spacing:.02em;
+    font-size:13px; padding:7px 11px; border-radius:999px;
+  }
+  .date-pill i{ width:7px; height:7px; background:#c0392b; border-radius:50%; display:block; }
+  .hero h1{
+    font-family:"DM Serif Display", Georgia, serif;
+    font-weight:400; font-size:44px; line-height:.95; letter-spacing:-.02em;
+    margin:16px 0 8px; position:relative; z-index:1;
+  }
+  .hero h1 em{ font-style:italic; color:var(--gold-light); }
+  .hero p{ margin:0; color:rgba(255,255,255,.88); font-size:15.5px; line-height:1.5; max-width:34rem; position:relative; z-index:1; }
+  .hero-meta{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; position:relative; z-index:1; }
+  .hero-meta span{
+    font-size:12.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    border:1px solid rgba(255,255,255,.28); color:#fff; padding:7px 10px; border-radius:999px;
+    background:rgba(255,255,255,.08);
+  }
+
+  /* Sections */
+  .section{ margin-top:22px; }
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:12px; }
+  .section-head h2{
+    font-family:"DM Serif Display", Georgia, serif; font-weight:400;
+    font-size:26px; line-height:1; margin:0; letter-spacing:-.01em;
+  }
+  .section-head p{ margin:0; font-size:13px; color:var(--muted); font-weight:600; }
+
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:18px;
+    box-shadow:var(--shadow);
+  }
+
+  /* Timeline */
+  .timeline{ padding:6px 0; overflow:hidden; }
+  .step{ display:grid; grid-template-columns:86px 28px 1fr; gap:0 10px; padding:14px 16px 14px 14px; position:relative; }
+  .step + .step{ border-top:1px dashed var(--line); }
+  .time{ font-weight:800; font-size:14px; line-height:1.2; padding-top:2px; }
+  .time small{ display:block; font-weight:600; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-top:3px; }
+  .rail{ display:flex; flex-direction:column; align-items:center; }
+  .dot{ width:14px; height:14px; border-radius:50%; background:var(--emerald); border:3px solid var(--card); box-shadow:0 0 0 1px var(--line); margin-top:3px; flex-shrink:0; z-index:1; }
+  @media (prefers-color-scheme: dark){ .dot{ background:var(--gold); } }
+  .dot.planned{ background:#eab308; box-shadow:0 0 0 1px #eab308; }
+  .dot.final{ background:#0d3b2e; width:18px; height:18px; margin-top:1px; }
+  .step-body h3{ margin:0; font-size:16px; line-height:1.25; font-weight:700; }
+  .step-body p{ margin:5px 0 0; font-size:14.5px; color:var(--muted); line-height:1.5; }
+  .step-body p strong{ color:var(--ink); }
+  .note{
+    margin-top:10px; background:var(--card-2); border:1px solid var(--line);
+    border-radius:12px; padding:10px 12px; font-size:13.5px; line-height:1.5;
+  }
+  .note strong{ font-weight:800; }
+  .planned-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--amber-bg); color:var(--amber-ink); border:1px solid var(--amber-border);
+    font-size:11px; font-weight:800; letter-spacing:.07em; text-transform:uppercase;
+    padding:5px 8px; border-radius:999px; margin-left:8px; vertical-align:middle; white-space:nowrap;
+  }
+  .planned-box{
+    margin-top:10px; background:var(--amber-bg); border:1px solid var(--amber-border);
+    color:var(--amber-ink); border-radius:12px; padding:11px 12px; font-size:14px; line-height:1.5;
+  }
+  .planned-box b{ text-transform:uppercase; letter-spacing:.05em; font-size:12px; }
+
+  /* McSorley's details */
+  .mcsorley-card{ padding:18px; }
+  .mcsorley-top{ display:flex; gap:14px; align-items:flex-start; }
+  .mug{
+    width:52px; height:52px; border-radius:14px; background:var(--emerald); color:#fff;
+    display:grid; place-items:center; font-size:26px; flex-shrink:0;
+  }
+  @media (prefers-color-scheme: dark){ .mug{ background:#1e4d3a; color:var(--gold-light);} }
+  .mcsorley-top h3{ margin:0; font-size:19px; line-height:1.2; }
+  .mcsorley-top p{ margin:4px 0 0; color:var(--muted); font-size:14.5px; }
+  .mcsorley-top a{ text-decoration:underline; text-underline-offset:3px; font-weight:600; color:var(--ink); }
+  .detail-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px; }
+  .detail{
+    background:var(--bg); border:1px solid var(--line); border-radius:14px; padding:12px 13px;
+  }
+  @media (prefers-color-scheme: dark){ .detail{ background:var(--card-2);} }
+  .detail label{ display:block; font-size:11px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin-bottom:5px; }
+  .detail div{ font-size:14.5px; font-weight:700; line-height:1.35; }
+  .detail div small{ display:block; font-weight:500; color:var(--muted); font-size:13px; margin-top:2px; }
+  .ales{
+    margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:10px;
+  }
+  .ale{
+    border-radius:14px; padding:14px; text-align:center; border:1px solid var(--line);
+  }
+  .ale.light{ background:#fdf6d8; color:#5c4a00; }
+  .ale.dark{ background:#2b1d12; color:#f7e8c9; border-color:#2b1d12; }
+  @media (prefers-color-scheme: dark){
+    .ale.light{ background:#3a3312; color:#ffeeb0; border-color:#5a4f1a; }
+    .ale.dark{ background:#1a120b; }
+  }
+  .ale strong{ display:block; font-family:"DM Serif Display", Georgia, serif; font-size:22px; font-weight:400; letter-spacing:.02em; }
+  .ale span{ font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; opacity:.85; }
+
+  /* Lists */
+  .list-card{ overflow:hidden; }
+  .list-item{
+    display:flex; align-items:center; gap:14px; padding:14px 16px;
+  }
+  .list-item + .list-item{ border-top:1px solid var(--line); }
+  .num{
+    width:34px; height:34px; border-radius:50%; display:grid; place-items:center;
+    background:var(--emerald); color:#fff; font-weight:800; font-size:14px; flex-shrink:0;
+  }
+  @media (prefers-color-scheme: dark){ .num{ background:#23483a; color:var(--gold-light);} }
+  .list-item div{ font-weight:700; font-size:16px; line-height:1.25; }
+  .list-item div small{ display:block; font-weight:500; color:var(--muted); font-size:13px; margin-top:1px; }
+  .list-item .pub-info{ flex:1; min-width:0; }
+  .bar-link{
+    color:inherit; text-decoration:none; font-weight:700;
+    border-bottom:1px solid var(--gold); padding-bottom:1px;
+  }
+  .bar-link:hover{ text-decoration:underline; text-underline-offset:3px; }
+  .bar-link .ext{ font-size:12px; color:var(--muted); font-weight:600; margin-left:2px; white-space:nowrap; }
+  .site-link{
+    display:inline-flex; align-items:center; gap:4px; margin-top:5px;
+    font-size:13.5px; font-weight:700; color:var(--emerald);
+    text-decoration:underline; text-underline-offset:3px;
+  }
+  @media (prefers-color-scheme: dark){ .site-link{ color:var(--gold-light); } }
+  .dir-link{
+    flex-shrink:0; display:inline-flex; align-items:center; justify-content:center;
+    font-size:13.5px; font-weight:700; line-height:1; color:var(--emerald);
+    text-decoration:none; border:1px solid var(--line); background:var(--card-2);
+    padding:8px 12px; border-radius:999px; white-space:nowrap;
+  }
+  .dir-link:hover{ text-decoration:underline; text-underline-offset:3px; }
+  @media (prefers-color-scheme: dark){ .dir-link{ color:var(--gold-light); } }
+
+  .dinner-head{
+    display:flex; gap:10px; align-items:center; background:var(--card-2); border-bottom:1px solid var(--line);
+    padding:12px 16px; font-size:13.5px; line-height:1.45;
+  }
+  .dinner-head b{ white-space:nowrap; }
+
+  footer{
+    margin-top:28px; text-align:center; padding:22px 10px 6px;
+    border-top:1px solid var(--line);
+  }
+  footer blockquote{
+    margin:0; font-family:"DM Serif Display", Georgia, serif;
+    font-size:28px; line-height:1; font-style:italic;
+  }
+  footer p{ margin:8px 0 0; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:700; }
+
+  @media (max-width:520px){
+    .hero h1{ font-size:38px; }
+    .step{ grid-template-columns:74px 24px 1fr; padding:13px 12px; }
+    .time{ font-size:13.5px; }
+    .detail-grid{ grid-template-columns:1fr 1fr; }
+    .section-head h2{ font-size:24px; }
+  }
+  @media (max-width:380px){
+    .detail-grid{ grid-template-columns:1fr; }
+    .ales{ grid-template-columns:1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-top">
+      <span class="date-pill"><i></i> FRI • NOV 27 • DAY AFTER THANKSGIVING</span>
+    </div>
+    <h1>McSorley's <em>Trip</em></h1>
+    <p>North White Plains to the East Village — train in, meet Bill at Grand Central, then straight to McSorley's for Light &amp; Dark.</p>
+    <div class="hero-meta">
+      <span>🚆 Harlem Line</span>
+      <span>🍺 Est. 1854</span>
+      <span>💵 Cash Only</span>
+    </div>
+  </header>
+
+  <!-- ITINERARY -->
+  <section class="section" aria-labelledby="itin-title">
+    <div class="section-head">
+      <h2 id="itin-title">The run in</h2>
+      <p>About 1 hr 25 min door to bar</p>
+    </div>
+    <div class="card timeline">
+      <div class="step">
+        <div class="time">10:05 AM<small>Depart</small></div>
+        <div class="rail"><span class="dot"></span></div>
+        <div class="step-body">
+          <h3>Metro-North — Harlem Line</h3>
+          <p><strong>North White Plains → Grand Central</strong><br>Arrives about <strong>10:55 AM</strong> — about a 50-minute ride.</p>
+          <div class="note"><strong>That day:</strong> Metro-North runs a <strong>Saturday schedule + extra trains</strong>, with <strong>off-peak fares all day</strong>. Worth a quick check in the <strong>TrainTime app</strong> that morning before you leave.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="time">11:00 AM<small>Meet</small></div>
+        <div class="rail"><span class="dot planned"></span></div>
+        <div class="step-body">
+          <h3>Bill Ebinger — at the clock <span class="planned-badge">● Planned</span></h3>
+          <p>Meet <strong>Bill Ebinger at the clock in Grand Central</strong>.</p>
+          <div class="planned-box"><b>Planned — not confirmed</b><br>Waiting on Bill's reply. Don't count it as locked in yet.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="time">~11:05 AM<small>Subway</small></div>
+        <div class="rail"><span class="dot"></span></div>
+        <div class="step-body">
+          <h3>6 train to Astor Place</h3>
+          <p>Downtown <strong>6 to Astor Place</strong>, then a <strong>5-minute walk</strong> to East 7th Street.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="time">~11:30 AM<small>Arrive</small></div>
+        <div class="rail"><span class="dot final"></span></div>
+        <div class="step-body">
+          <h3>McSorley's Old Ale House</h3>
+          <p>You should be at the bar by about <strong>11:30 AM</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROSTER -->
+  <section class="section" aria-labelledby="roster-title">
+    <div class="section-head">
+      <h2 id="roster-title">Roster</h2>
+      <p>Who's on the trip</p>
+    </div>
+    <div class="card list-card">
+      <div class="list-item"><span class="num">1</span><div class="pub-info">Todd</div></div>
+      <div class="list-item"><span class="num">2</span><div class="pub-info">Jim</div></div>
+      <div class="list-item"><span class="num">3</span><div class="pub-info">Matt M.</div></div>
+      <div class="list-item"><span class="num">4</span><div class="pub-info">Matt G.</div></div>
+      <div class="list-item"><span class="num">5</span><div class="pub-info">Martin</div></div>
+      <div class="list-item"><span class="num">6</span><div class="pub-info">Ron</div></div>
+      <div class="list-item"><span class="num">7</span><div class="pub-info">Bill Ebinger<small>Meeting at the Grand Central clock at 11 AM</small><span class="planned-badge" style="margin-left:0; margin-top:7px;">Invited — waiting on his reply</span></div></div>
+      <div class="list-item"><span class="num">8</span><div class="pub-info">Tommy</div></div>
+      <div class="list-item"><span class="num">9</span><div class="pub-info">Darren</div></div>
+      <div class="list-item"><span class="num">10</span><div class="pub-info">Col. Clancy</div></div>
+    </div>
+  </section>
+
+  <!-- MCSORLEY'S -->
+  <section class="section" aria-labelledby="mc-title">
+    <div class="section-head">
+      <h2 id="mc-title">McSorley's</h2>
+      <p>Know before you go</p>
+    </div>
+    <div class="card mcsorley-card">
+      <div class="mcsorley-top">
+        <div class="mug" aria-hidden="true">🍺</div>
+        <div>
+          <h3>McSorley's Old Ale House</h3>
+          <p><a href="https://www.google.com/maps/search/?api=1&query=McSorley's+Old+Ale+House+15+East+7th+Street+New+York+NY+10003" target="_blank" rel="noopener">15 East 7th Street, New York, NY 10003</a><br><a class="site-link" href="https://mcsorleysoldalehouse.nyc/" target="_blank" rel="noopener">mcsorleysoldalehouse.nyc ↗</a></p>
+        </div>
+      </div>
+
+      <div class="detail-grid">
+        <div class="detail">
+          <label>Friday hours</label>
+          <div>11:00 AM – 1:00 AM</div>
+        </div>
+        <div class="detail">
+          <label>Payment</label>
+          <div>Cash only<small>No cards</small></div>
+        </div>
+        <div class="detail">
+          <label>Seating</label>
+          <div>No reservations<small>First come, first served</small></div>
+        </div>
+        <div class="detail">
+          <label>How it works</label>
+          <div>Served in pairs<small>Two mugs at a time</small></div>
+        </div>
+      </div>
+
+      <div class="ales" aria-label="The two ales">
+        <div class="ale light"><strong>Light</strong><span>McSorley's Light Ale</span></div>
+        <div class="ale dark"><strong>Dark</strong><span>McSorley's Dark Ale</span></div>
+      </div>
+      <p style="margin:12px 2px 0; font-size:13.5px; color:var(--muted); text-align:center;">Just two ales — Light or Dark. That's the whole beer list.</p>
+    </div>
+  </section>
+
+  <!-- AFTER PUBS -->
+  <section class="section" aria-labelledby="after-title">
+    <div class="section-head">
+      <h2 id="after-title">After McSorley's</h2>
+      <p>8 spots already picked</p>
+    </div>
+    <div class="card list-card">
+      <div class="list-item"><span class="num">1</span><div class="pub-info"><a class="bar-link" href="https://www.holidaycocktaillounge.bar/" target="_blank" rel="noopener">Holiday Cocktail Lounge <span class="ext">↗ Website</span></a><small>75 St Marks Pl, New York, NY 10003 · ~5 min walk</small></div><a class="dir-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=McSorley's+Old+Ale+House+15+East+7th+Street+New+York+NY&amp;destination=Holiday+Cocktail+Lounge+75+St+Marks+Pl+New+York+NY+10003&amp;travelmode=walking" target="_blank" rel="noopener">Directions</a></div>
+      <div class="list-item"><span class="num">2</span><div class="pub-info"><a class="bar-link" href="https://www.facebook.com/7bHorseshoeBarAkaVazacs/" target="_blank" rel="noopener">7B Horseshoe Bar <span class="ext">↗ Website</span></a><small>108 Avenue B, New York, NY 10009 · ~13 min walk</small></div><a class="dir-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=McSorley's+Old+Ale+House+15+East+7th+Street+New+York+NY&amp;destination=7B+Horseshoe+Bar+108+Avenue+B+New+York+NY+10009&amp;travelmode=walking" target="_blank" rel="noopener">Directions</a></div>
+      <div class="list-item"><span class="num">3</span><div class="pub-info"><a class="bar-link" href="http://www.belfrynyc.com/" target="_blank" rel="noopener">The Belfry <span class="ext">↗ Website</span></a><small>222 E 14th St, New York, NY 10003 · ~9 min walk</small></div><a class="dir-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=McSorley's+Old+Ale+House+15+East+7th+Street+New+York+NY&amp;destination=The+Belfry+222+E+14th+St+New+York+NY+10003&amp;travelmode=walking" target="_blank" rel="noopener">Directions</a></div>
+      <div class="list-item"><span class="num">4</span><div class="pub-info"><a class="bar-link" href="https://ichibanteiny.com/" target="_blank" rel="noopener">Ichibantei <span class="ext">↗ Website</span></a><small>100 3rd Ave, New York, NY 10003 · ~7 min walk</small></div><a class="dir-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=McSorley's+Old+Ale+House+15+East+7th+Street+New+York+NY&amp;destination=Ichibantei+100+3rd+Ave+New+York+NY+10003&amp;travelmode=walking" target="_blank" rel="noopener">Directions</a></div>
+      <div class="list-item"><span class="num">5</span><div class="pub-info"><a class="bar-link" href="https://www.thecopperstillnyc.com/" target="_blank" rel="noopener">The Copper Still <span class="ext">↗ Website</span></a><small>151 2nd Ave, New York, NY 10003 · ~4 min walk</small></div><a class="dir-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=McSorley's+Old+Ale+House+15+East+7th+Street+New+York+NY&amp;destination=The+Copper+Still+151+2nd+Ave+New+York+NY+10003&amp;travelmode=walking" target="_blank" rel="noopener">Directions</a></div>
+      <div class="list-item"><span class="num">6</span><div class="pub-info"><a class="bar-link" href="http://www.bullmccabes.com/index.html" target="_blank" rel="noopener">Bull McCabe's <span class="ext">↗ Website</span></a><small>29 St Marks Pl, New York, NY 10003 · ~3 min walk</small></div><a class="dir-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=McSorley's+Old+Ale+House+15+East+7th+Street+New+York+NY&amp;destination=Bull+McCabe%27s+29+St+Marks+Pl+New+York+NY+10003&amp;travelmode=walking" target="_blank" rel="noopener">Directions</a></div>
+      <div class="list-item"><span class="num">7</span><div class="pub-info"><a class="bar-link" href="http://11thstbar.com/" target="_blank" rel="noopener">11th St. Bar <span class="ext">↗ Website</span></a><small>510 E 11th St, New York, NY 10009 · ~10 min walk</small></div><a class="dir-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=McSorley's+Old+Ale+House+15+East+7th+Street+New+York+NY&amp;destination=11th+St.+Bar+510+E+11th+St+New+York+NY+10009&amp;travelmode=walking" target="_blank" rel="noopener">Directions</a></div>
+      <div class="list-item"><span class="num">8</span><div class="pub-info"><a class="bar-link" href="http://www.thegraftonnyc.com/" target="_blank" rel="noopener">The Grafton <span class="ext">↗ Website</span></a><small>126 1st Ave, New York, NY 10009 · ~7 min walk</small></div><a class="dir-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=McSorley's+Old+Ale+House+15+East+7th+Street+New+York+NY&amp;destination=The+Grafton+126+1st+Ave+New+York+NY+10009&amp;travelmode=walking" target="_blank" rel="noopener">Directions</a></div>
+    </div>
+    <p style="margin:10px 4px 0; font-size:13px; color:var(--muted);">Tap a bar's name to open its website. All walkable in the East Village — regular Friday hours, holiday-weekend hours may vary.</p>
+  </section>
+
+  <!-- DINNER -->
+  <section class="section" aria-labelledby="dinner-title">
+    <div class="section-head">
+      <h2 id="dinner-title">Dinner — 5 PM</h2>
+      <p>5 spots already picked</p>
+    </div>
+    <div class="card list-card">
+      <div class="dinner-head"><b>ℹ️ No reservation</b><span>You declined a reservation — these are walk-in options near McSorley's for 5 PM.</span></div>
+      <div class="list-item"><span class="num">1</span><div>Pangea</div></div>
+      <div class="list-item"><span class="num">2</span><div>Ippudo</div></div>
+      <div class="list-item"><span class="num">3</span><div>KENKA</div></div>
+      <div class="list-item"><span class="num">4</span><div>Giano</div></div>
+      <div class="list-item"><span class="num">5</span><div>Pylos</div></div>
+    </div>
+  </section>
+
+  <footer>
+    <blockquote>“Be good or be gone.”</blockquote>
+    <p>McSorley's Old Ale House — House Rule</p>
+  </footer>
+
+</div>
+</body>
+</html>
